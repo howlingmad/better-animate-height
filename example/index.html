@@ -4,10 +4,12 @@
 </head>
 <body>
     <div class="container">
-        <div class="button-container">
-            <button>this is a button</button>
-            <div class="menu-container">
-                <ul class="thing">
+        <h1>Animate height using translateY</h1>
+        <div class="example">
+            <h2>1. JS height</h2>
+            <div class="button-container js-height">
+                <button>button</button>
+                <ul class="menu menu-height">
                     <li>list item</li>
                     <li>list item</li>
                     <li>list item</li>
@@ -15,12 +17,73 @@
                 </ul>
             </div>
         </div>
-        <!--<div class="button-container" style="overflow:visible">
-            <button>this is a button</button>
-            <div class="menu-container" style="background:blue;overflow:visible;">
-                <div class="thing" style="background:red;color:red;padding:5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ullamcorper, ante et ullamcorper porta, velit diam sollicitudin libero, in fermentum ligula magna nec justo. Etiam suscipit blandit massa, in tincidunt justo.</div>
+
+        <div class="example">
+            <h2>2. JS click</h2>
+            <div class="button-container js-simple">
+                <button>button</button>
+                <div class="menu-container">
+                    <ul class="menu menu--translate">
+                        <li>list item</li>
+                        <li>list item</li>
+                        <li>list item</li>
+                        <li>list item</li>
+                    </ul>
+                </div>
             </div>
-        </div>-->
+        </div>
+
+        <div class="example">
+            <h2>3. CSS hover</h2>
+            <div class="button-container css-hover">
+                <button>button</button>
+                <div class="menu-container">
+                    <ul class="menu menu--translate">
+                        <li>list item</li>
+                        <li>list item</li>
+                        <li>list item</li>
+                        <li>list item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>4. CSS click</h2>
+            <div class="button-container css-click">
+                <div class="fake-btn cf">
+                    <span class="btn">button</span>
+                    <input type="checkbox" name="fake-button" value="button">
+                    <div class="menu-container">
+                        <ul class="menu menu--translate">
+                            <li>list item</li>
+                            <li>list item</li>
+                            <li>list item</li>
+                            <li>list item</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>A common problem in CSS is wanting to animate the height of an element from 0 to auto using CSS transitions. The commonly used solutions are either to work out the height you want to animate to <a href="https://css-tricks.com/css-animate-fromto-auto/">using javascript</a> (<em>see example 1 above</em>) or setting a large max-height on the element we wish to animate and hiding the overflow. Both of those techniques are undesireable as they require you to either know the height of the element you are animating, or fake it. Animating the height of an element also <a href="http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/">expensive</a>. We want to try and perform cheap animations by only changing properties that affect compositing - transform and opacity</p>
+
+        <div class="expandable cf">
+            <input type="checkbox" name="handle" value="handle">
+            <div class="expandable-container">
+                <div class="expandable__content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus dolor at mauris vehicula, sed commodo tellus porta. Nunc luctus ornare eros in tincidunt. Proin in eleifend risus. Ut facilisis velit a elit tincidunt luctus. Nulla venenatis sed mauris sit amet dignissim. Cras turpis magna, euismod sit amet consectetur sed, porta a dui. Duis auctor tellus nec diam mollis, eget faucibus risus imperdiet. Integer eget mollis est, vitae blandit sapien. Proin eleifend id nisi in mollis.</p>
+                </div>
+            </div>
+            <span class="expandable__handle">
+                <span>show content</span>
+                <span>hide content</span>
+            </span>
+        </div>
+
+        <p>In the examples above (2-4) we only use animate transform and opacity by sliding the menu in and out of view using translateY. If you dig through the code for this you will also see that we do not need to know the height of the element we are animating for this to work. In <em>example 2</em> we only use javascript to add/remove a class on click, and if you don't mind slightly ugly html we can even do this using just CSS (<em>example 4</em>). If you want to animate the menu on hover then we can achieve this with clean, semantic markup using only CSS (<em>example 3</em>).</p>
+
+        <p>One limitation of this technique, is that an element scaled with the transform property still exists in the stacking order of the site, preventing sibling elements from moving up to fill the empty space. This works fine for our button example as the dropdown is positioned absolutely, but fails for elements within the normal content flow. The <strong>show content</strong> box above uses the same techniques with a little bit of javascript to get close to a solution, but there is still a jump in the content underneath before and after the animation.</p>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="script.js"></script>
